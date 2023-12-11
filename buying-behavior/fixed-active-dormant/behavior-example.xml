@@ -2,7 +2,7 @@
 
 <simulation>
   <control>
-    <duration>108</duration>
+    <duration>20</duration>
     <startmonth>1</startmonth>
     <startyear>2000</startyear>
     <explicit_inventory>true</explicit_inventory>
