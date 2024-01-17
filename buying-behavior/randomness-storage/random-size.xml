@@ -1,0 +1,98 @@
+<!-- 1 Source Source, 1 Sink Sink -->
+
+<simulation>
+  <control>
+    <duration>1825</duration>
+    <startmonth>1</startmonth>
+    <startyear>2025</startyear>
+    <dt>86400</dt>
+  </control>
+
+  <archetypes>
+    <spec>
+      <lib>cycamore</lib>
+      <name>Source</name>
+    </spec>
+    <spec>
+      <lib>cycamore</lib>
+      <name>Storage</name>
+    </spec>
+    <spec>
+      <lib>cycamore</lib>
+      <name>Sink</name>
+    </spec>
+    <spec>
+      <lib>agents</lib>
+      <name>NullRegion</name>
+    </spec>
+    <spec>
+      <lib>agents</lib>
+      <name>NullInst</name>
+    </spec>
+  </archetypes>
+
+  <facility>
+    <name>Source</name>
+    <config>
+      <Source>
+        <outcommod>commodity</outcommod>
+        <outrecipe>commod_recipe</outrecipe>
+        <throughput>1</throughput>
+      </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>Storage</name>
+    <config>
+        <Storage>
+            <in_commods><val>commodity</val></in_commods>
+            <out_commods><val>commodity_stored</val></out_commods>
+            <throughput>1</throughput>
+            <buying_size_type>Normal</buying_size_type>
+            <buying_size_mean>0.5</buying_size_mean>
+            <buying_size_stddev>0.25</buying_size_stddev>
+        </Storage>
+    </config>
+  </facility>
+
+  <facility>
+    <name>Sink</name>
+    <config>
+      <Sink>
+        <in_commods>
+          <val>commodity_stored</val>
+        </in_commods>
+        <capacity>1</capacity>
+      </Sink>
+    </config>
+  </facility>
+
+  <region>
+    <name>SingleRegion</name>
+    <config><NullRegion/></config>
+    <institution>
+      <name>SingleInstitution</name>
+      <initialfacilitylist>
+        <entry><prototype>Source</prototype><number>1</number></entry>
+        <entry><prototype>Storage</prototype><number>1</number></entry>
+        <entry><prototype>Sink</prototype><number>1</number></entry>
+      </initialfacilitylist>
+      <config><NullInst/></config>
+    </institution>
+  </region>
+
+  <recipe>
+    <name>commod_recipe</name>
+    <basis>mass</basis>
+    <nuclide>
+      <id>922350000</id>
+      <comp>0.03</comp>
+    </nuclide>
+    <nuclide>
+      <id>922380000</id>
+      <comp>0.97</comp>
+    </nuclide>
+  </recipe>
+
+</simulation>
