@@ -1,0 +1,87 @@
+<!-- 1 Source Source, 1 Sink Sink -->
+
+<simulation>
+  <control>
+    <duration>100</duration>
+    <startmonth>1</startmonth>
+    <startyear>2000</startyear>
+    <seed>20231211</seed>
+  </control>
+
+  <archetypes>
+    <spec>
+      <lib>cycamore</lib>
+      <name>Source</name>
+    </spec>
+    <spec>
+      <lib>cycamore</lib>
+      <name>Sink</name>
+    </spec>
+    <spec>
+      <lib>agents</lib>
+      <name>NullRegion</name>
+    </spec>
+    <spec>
+      <lib>agents</lib>
+      <name>NullInst</name>
+    </spec>
+  </archetypes>
+
+  <facility>
+    <name>SomeSource</name>
+    <config>
+      <Source>
+        <outcommod>commodity</outcommod>
+        <outrecipe>commod_recipe</outrecipe>
+        <throughput>20</throughput>
+      </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>SomeSink</name>
+    <config>
+      <Sink>
+        <in_commods>
+          <val>commodity</val>
+        </in_commods>
+        <capacity>20</capacity>
+        <random_size_type>NormalReal</random_size_type>
+        <random_size_mean>0.5</random_size_mean>
+        <random_size_stddev>0.2</random_size_stddev>
+        <random_frequency_type>UniformInt</random_frequency_type> 
+        <random_frequency_min>5</random_frequency_min> 
+        <random_frequency_max>15</random_frequency_max>
+      </Sink>
+    </config>
+  </facility>
+
+  <region>
+    <name>SingleRegion</name>
+    <config><NullRegion/></config>
+    <institution>
+      <name>SingleInstitution</name>
+      <initialfacilitylist>
+        <entry>
+          <prototype>SomeSource</prototype>
+          <number>1</number>
+        </entry>
+        <entry>
+          <prototype>SomeSink</prototype>
+          <number>1</number>
+        </entry>
+      </initialfacilitylist>
+      <config><NullInst/></config>
+    </institution>
+  </region>
+
+  <recipe>
+    <name>commod_recipe</name>
+    <basis>mass</basis>
+    <nuclide>
+      <id>010010000</id>
+      <comp>1</comp>
+    </nuclide>
+  </recipe>
+
+</simulation>
