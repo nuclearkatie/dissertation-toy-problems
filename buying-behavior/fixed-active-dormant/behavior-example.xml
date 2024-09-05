@@ -34,8 +34,10 @@
         <in_commods><val>commodity</val></in_commods>
         <out_commods><val>commodity1</val></out_commods>
         <throughput>5</throughput>
-        <active_buying>5</active_buying>
-        <dormant_buying>2</dormant_buying>
+        <active_buying_frequency_type>Fixed</active_buying_frequency_type>
+        <active_buying_val>5</active_buying_val>
+        <dormant_buying_frequency_type>Fixed</dormant_buying_frequency_type>
+        <dormant_buying_val>2</dormant_buying_val>
       </Storage>
     </config>
   </facility>
