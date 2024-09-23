@@ -1,0 +1,90 @@
+<simulation>
+
+<control>
+    <startmonth>1</startmonth>
+    <startyear>2025</startyear>
+    <dt>86400</dt>
+    <duration>5</duration>
+    <explicit_inventory>0</explicit_inventory>
+    <explicit_inventory_compact>0</explicit_inventory_compact>
+</control>
+
+<archetypes>
+    <spec><lib>cycamore</lib><name>Source</name></spec>
+    <spec><lib>cycamore</lib><name>Storage</name></spec>
+    <spec><lib>cycamore</lib><name>Sink</name></spec>
+    <spec><lib>agents</lib><name>NullRegion</name></spec>
+    <spec><lib>agents</lib><name>NullInst</name></spec>
+</archetypes>
+
+<facility>
+    <name>Source</name>
+    <config>
+        <Source>
+            <outcommod>commod</outcommod>
+            <outrecipe>commod_recipe</outrecipe>
+        </Source>
+    </config>
+</facility>
+
+<facility>
+    <name>Storage</name>
+    <config>
+        <Storage>
+            <in_commods><val>commod</val></in_commods>
+            <out_commods><val>commod1</val></out_commods>
+            <throughput>2.5</throughput>
+            <max_inv_size>2.5</max_inv_size>
+            <package>pkg</package>
+        </Storage>
+    </config>
+</facility>
+
+<facility>
+    <name>Sink</name>
+    <config>
+        <Sink>
+            <in_commods><val>commod1</val></in_commods>
+            <capacity>2</capacity>
+        </Sink>
+    </config>
+</facility>
+
+<package>
+    <name>pkg</name>
+    <fill_min>1</fill_min>
+    <fill_max>1</fill_max>
+    <strategy>first</strategy>
+</package>
+
+<!-- <transportunit>
+    <name>tu</name>
+    <fill_min>2</fill_min>
+    <fill_max>2</fill_max>
+    <strategy>hybrid</strategy>
+</transportunit> -->
+
+  <recipe>
+    <name>commod_recipe</name>
+    <basis>mass</basis>
+    <nuclide>
+      <id>010010000</id>
+      <comp>1</comp>
+    </nuclide>
+  </recipe>
+
+<region>
+    <name>Region</name>
+    <config><NullRegion/></config>
+    <institution>
+        <name>Inst</name>
+        <config><NullInst/></config>
+        <initialfacilitylist>
+            <entry><prototype>Source</prototype><number>1</number></entry>
+            <entry><prototype>Storage</prototype><number>1</number></entry>
+            <entry><prototype>Sink</prototype><number>2</number></entry>
+        </initialfacilitylist>
+    </institution>
+</region>
+
+</simulation>
