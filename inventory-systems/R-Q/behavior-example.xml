@@ -1,0 +1,80 @@
+<!-- 1 Source 1 Storage, 1 Sink -->
+
+<simulation>
+  <control>
+    <duration>20</duration>
+    <startmonth>1</startmonth>
+    <startyear>2000</startyear>
+    <explicit_inventory>true</explicit_inventory>
+  </control>
+
+  <archetypes>
+    <spec><lib>cycamore</lib><name>Source</name></spec>
+    <spec><lib>cycamore</lib><name>Storage</name></spec>
+    <spec><lib>cycamore</lib><name>Sink</name></spec>
+    <spec><lib>agents</lib><name>NullRegion</name></spec>
+    <spec><lib>agents</lib><name>NullInst</name></spec>
+  </archetypes>
+
+  <facility>
+    <name>Source</name>
+    <config>
+      <Source>
+        <outcommod>commodity</outcommod>
+        <outrecipe>commod_recipe</outrecipe>
+      </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>Storage</name>
+    <config>
+      <Storage>
+        <in_commods><val>commodity</val></in_commods>
+        <out_commods><val>commodity1</val></out_commods>
+        <max_inv_size>14</max_inv_size>
+        <reorder_point>2</reorder_point>
+        <reorder_quantity>12</reorder_quantity>
+      </Storage>
+    </config>
+  </facility>
+
+  <facility>
+    <name>Sink</name>
+    <config>
+      <Sink>
+        <in_commods>
+          <val>commodity1</val>
+        </in_commods>
+        <random_size_type>NormalReal</random_size_type>
+        <random_size_mean>0.5</random_size_mean>
+        <random_size_stddev>0.16667</random_size_stddev>
+        <capacity>6</capacity>
+      </Sink>
+    </config>
+  </facility>
+
+  <region>
+    <name>SingleRegion</name>
+    <config><NullRegion/></config>
+    <institution>
+      <name>SingleInstitution</name>
+      <initialfacilitylist>
+        <entry><prototype>Source</prototype><number>1</number></entry>
+        <entry><prototype>Storage</prototype><number>1</number></entry>
+        <entry><prototype>Sink</prototype><number>1</number></entry>
+      </initialfacilitylist>
+      <config><NullInst/></config>
+    </institution>
+  </region>
+
+  <recipe>
+    <name>commod_recipe</name>
+    <basis>mass</basis>
+    <nuclide>
+      <id>010010000</id>
+      <comp>1</comp>
+    </nuclide>
+  </recipe>
+
+</simulation>
