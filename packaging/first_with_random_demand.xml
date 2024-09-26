@@ -4,14 +4,14 @@
     <startmonth>1</startmonth>
     <startyear>2025</startyear>
     <dt>86400</dt>
-    <duration>250</duration>
+    <duration>5000</duration>
     <explicit_inventory>0</explicit_inventory>
     <explicit_inventory_compact>0</explicit_inventory_compact>
+    <seed>20240924</seed>
 </control>
 
 <archetypes>
     <spec><lib>cycamore</lib><name>Source</name></spec>
-    <spec><lib>cycamore</lib><name>Storage</name></spec>
     <spec><lib>cycamore</lib><name>Sink</name></spec>
     <spec><lib>agents</lib><name>NullRegion</name></spec>
     <spec><lib>agents</lib><name>NullInst</name></spec>
@@ -23,29 +23,9 @@
         <Source>
             <outcommod>commod</outcommod>
             <outrecipe>commod_recipe</outrecipe>
-            <throughput>1</throughput>
-        </Source>
-    </config>
-</facility>
-
-<facility>
-    <name>Storage</name>
-    <config>
-        <Storage>
-            <in_commods><val>commod</val></in_commods>
-            <out_commods><val>commod1</val></out_commods>
-        </Storage>
-    </config>
-</facility>
-
-<facility>
-    <name>StoragePackaging</name>
-    <config>
-        <Storage>
-            <in_commods><val>commod1</val></in_commods>
-            <out_commods><val>commod2</val></out_commods>
+            <throughput>2.5</throughput>
             <package>pkg</package>
-        </Storage>
+        </Source>
     </config>
 </facility>
 
@@ -54,16 +34,20 @@
     <config>
         <Sink>
             <in_commods>
-                <val>commod2</val>
+                <val>commod</val>
             </in_commods>
+            <capacity>2.5</capacity>
+            <random_size_type>NormalReal</random_size_type>
+            <random_size_mean>0.8</random_size_mean>
+            <random_size_stddev>0.1</random_size_stddev>
         </Sink>
     </config>
 </facility>
 
 <package>
     <name>pkg</name>
-    <fill_min>4</fill_min>
-    <fill_max>4</fill_max>
+    <fill_min>0.75</fill_min>
+    <fill_max>1.25</fill_max>
     <strategy>first</strategy>
 </package>
 
@@ -81,8 +65,6 @@
         <config><NullInst/></config>
         <initialfacilitylist>
             <entry><prototype>Source</prototype><number>1</number></entry>
-            <entry><prototype>Storage</prototype><number>1</number></entry>
-            <entry><prototype>StoragePackaging</prototype><number>1</number></entry>
             <entry><prototype>Sink</prototype><number>1</number></entry>
         </initialfacilitylist>
     </institution>

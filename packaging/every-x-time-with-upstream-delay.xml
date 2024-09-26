@@ -29,11 +29,12 @@
 </facility>
 
 <facility>
-    <name>Storage</name>
+    <name>StorageLimited</name>
     <config>
         <Storage>
             <in_commods><val>commod</val></in_commods>
             <out_commods><val>commod1</val></out_commods>
+            <!-- <max_inv_size>2</max_inv_size> -->
         </Storage>
     </config>
 </facility>
@@ -45,6 +46,8 @@
             <in_commods><val>commod1</val></in_commods>
             <out_commods><val>commod2</val></out_commods>
             <package>pkg</package>
+            <throughput>1</throughput>
+            <max_inv_size>2.75</max_inv_size>
         </Storage>
     </config>
 </facility>
@@ -62,8 +65,8 @@
 
 <package>
     <name>pkg</name>
-    <fill_min>4</fill_min>
-    <fill_max>4</fill_max>
+    <fill_min>2.5</fill_min>
+    <fill_max>2.5</fill_max>
     <strategy>first</strategy>
 </package>
 
@@ -81,7 +84,7 @@
         <config><NullInst/></config>
         <initialfacilitylist>
             <entry><prototype>Source</prototype><number>1</number></entry>
-            <entry><prototype>Storage</prototype><number>1</number></entry>
+            <entry><prototype>StorageLimited</prototype><number>1</number></entry>
             <entry><prototype>StoragePackaging</prototype><number>1</number></entry>
             <entry><prototype>Sink</prototype><number>1</number></entry>
         </initialfacilitylist>
