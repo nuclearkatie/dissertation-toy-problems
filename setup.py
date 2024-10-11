@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
+from matplotlib import ticker
 import seaborn as sns
 
 fig_params = {'axes.labelsize': 11.5,

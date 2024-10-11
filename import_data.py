@@ -23,6 +23,7 @@ def get_data(file, ignore_commods=[]):
             'agents': agents,
             'facilities': facilities,
             'transactions': transactions,
+            'resources': mat,
             'ei': ei}
     
     return name, data
